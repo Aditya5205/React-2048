@@ -1,5 +1,3 @@
-import React from "react";
-
 const Box = ({ value, isSelected, isFail }) => {
   let backbg = "";
   if (isSelected) {
@@ -19,7 +17,9 @@ const Box = ({ value, isSelected, isFail }) => {
 
   return (
     <>
-      <div className={`box h-20 w-20 rounded-xl border-none ${backbg}`}>
+      <div
+        className={`flex h-[70px] w-[70px] items-center justify-center rounded-xl border border-none p-2 text-3xl font-bold sm:h-28 sm:w-28 sm:text-5xl ${backbg}`}
+      >
         {value !== 0 ? value : null}
       </div>
     </>

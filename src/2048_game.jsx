@@ -218,58 +218,65 @@ const Game = () => {
     else if (key === "ArrowRight") onKeyRight();
   };
 
+  useEffect(() => {
+    document.getElementById("main-container").focus();
+  });
+
   return (
     <>
       <div
-        className="flex h-screen overflow-scroll w-full flex-wrap items-center justify-center bg-[#232B2B] bg-cover bg-no-repeat"
+        className="flex min-h-screen justify-center bg-[#232B2B] pt-10"
         tabIndex={0}
-        onKeyDown={(e) => handleKeyDown(e)}
+        onKeyUp={(e) => handleKeyDown(e)}
+        id="main-container"
       >
-        <div className="sm:fixed sm:left-1/4 sm:flex sm:flex-col flex relative m-4 gap-x-5">
-          <div className="mb-5 h-fit w-auto rounded-lg bg-blue-500 px-5 py-1 text-center text-xl font-bold text-white">
-            <div className="text-5xl ">{score}</div>
-            <br />
-            Score
-          </div>
-          <div className="h-fit w-auto rounded-lg bg-blue-500 px-5 py-1 text-center text-xl font-bold text-white">
-            <div className="text-5xl ">{bestScore}</div>
-            <br />
-            Best Score
-          </div>
-        </div>
-        <div className="text-center">
-          <div className="mb-7 flex flex-wrap items-center justify-center">
-            <div
-              className="w-fit rounded-xl bg-blue-500 p-3 text-4xl font-bold
-             text-white"
-            >
+        <div className="flex flex-col">
+          <div className="flex">
+            <div className="h-fit w-fit rounded-xl bg-blue-500 p-2 text-2xl font-bold text-white sm:px-5 sm:py-3 sm:text-4xl">
               2048 GAME
             </div>
-          </div>
-          <div className={`mx-auto h-fit w-fit rounded-xl ${failed}`}>
-            <FailAnnounce isFail={fail} />
-            <div className="grid grid-rows-4 gap-2 p-3">
-              {arraychunk(arr).map((col, c) => (
-                <div key={c} className="grid grid-cols-4 gap-2">
-                  {col.map((val, i) => (
-                    <Box
-                      key={i}
-                      value={selected[val]}
-                      isSelected={selected[val] !== 0}
-                      isFail={fail}
-                    />
-                  ))}
-                </div>
-              ))}
+            <div className="ml-auto flex gap-x-3 text-center">
+              <div className="flex h-14 w-16 items-center justify-center rounded-lg bg-blue-500 px-3 py-1 text-lg font-bold text-white sm:h-16 sm:w-24 sm:px-5 sm:text-xl">
+                Score
+                <br />
+                {score}
+              </div>
+              <div className="flex h-14 w-16 items-center justify-center rounded-lg bg-blue-500 px-3 py-1 text-lg font-bold text-white sm:h-16 sm:w-24 sm:px-5 sm:text-xl">
+                Best
+                <br />
+                {bestScore}
+              </div>
             </div>
           </div>
-          <div className="">
+
+          <div className="mt-10 flex">
             <button
-              className="button ml-3 mt-7 font-semibold"
+              className="ml-auto h-fit rounded-lg bg-slate-500 px-2 py-2 text-lg font-bold text-white hover:bg-blue-500 hover:text-white sm:px-5 sm:text-xl"
               onClick={handleReset}
             >
-              Try Again!
+              Try Again
             </button>
+          </div>
+
+          <div className="mb-10 flex items-center justify-center "></div>
+          <div className="flex w-full items-center justify-center ">
+            <div className={`rounded-xl text-center ${failed}`}>
+              <FailAnnounce isFail={fail} />
+              <div className="grid grid-rows-4 gap-2 p-3">
+                {arraychunk(arr).map((col, c) => (
+                  <div key={c} className="grid grid-cols-4 gap-2">
+                    {col.map((val, i) => (
+                      <Box
+                        key={i}
+                        value={selected[val]}
+                        isSelected={selected[val] !== 0}
+                        isFail={fail}
+                      />
+                    ))}
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </div>
